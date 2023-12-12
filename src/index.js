@@ -5,7 +5,8 @@ import App from './App';
 import { createStore ,applyMiddleware} from 'redux';
 import { Provider } from 'react-redux';
 import reducers from './store/reducers';
-import axios from "axios";
+// import axios from "axios";
+import { thunk } from 'redux-thunk';
 import { compose } from 'redux';
 // import App from './App';
 
@@ -49,16 +50,16 @@ const loger = ( store ) => {
     }
   }
 }
-const loginFetch = ( store ) => ( next ) => async( action ) => {
-  if ( action.type === 'IN' ) {
-    let res = await axios.get( 'https://jsonplaceholder.typicode.com/users' );
-    action.payload = res.data[2].name;
-  }
-  return next( action )
-}
+// const loginFetch = ( store ) => ( next ) => async( action ) => {
+//   if ( action.type === 'IN' ) {
+//     let res = await axios.get( 'https://jsonplaceholder.typicode.com/users' );
+//     action.payload = res.data[2].name;
+//   }
+//   return next( action )
+// }
 let store = createStore( reducers,
   composeEnhancers(
-    applyMiddleware(loger,loginFetch)
+    applyMiddleware(loger,thunk)
   )
   // window.__REDUX_DEVTOOLS_EXTENSION__ &&
   // window.__REDUX_DEVTOOLS_EXTENSION__()

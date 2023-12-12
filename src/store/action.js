@@ -16,11 +16,13 @@ const decrement = (num) => {
     }
 }
 const login =  () => {
-    // let res = await axios.get( 'https://jsonplaceholder.typicode.com/users' );
-
-    return {
-        type: 'IN',
-         // payload:res.data[0].name
+    
+    return async ( dispatch ) => {
+        let res = await axios.get( 'https://jsonplaceholder.typicode.com/users' );
+        return dispatch({
+            type: 'IN',
+            payload: res.data[0].name
+        })
     }
 
 }
